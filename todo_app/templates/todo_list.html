@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+	<h1>TODO LIST</h1>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Name</th>
+				<th scope="col">Description</th>
+				<th scope="col">Priority</th>
+				<th scope="col">State</th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for task in tasks %}
+				<tr>
+					<td>{{task.name}}</td>
+					<td>{{task.description}}</td>
+					<td>{{task.priority.name}}</td>
+					<td>{{task.state.name}}</td>
+					<td>
+						<a href="{% url 'change_task_state' id=task.pk %}">
+							<button type="button" class="btn btn-outline-primary">
+							Change State
+							</button>
+						</a>
+					</td>
+					<td>
+						<a href="{% url 'edit_task' id=task.pk %}">
+							<button type="button" class="btn btn-outline-dark">
+							Edit
+						</button></a>
+						<a href="{% url 'delete_task' id=task.pk %}">
+							<button type="button" class="btn btn-outline-danger">
+							Delete
+						</button></a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
